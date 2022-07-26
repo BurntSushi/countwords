@@ -13,6 +13,7 @@ exec hyperfine \
   "./simple/target/release/countwords < kjvbible_x10.txt" \
   "./bonus/target/release/countwords < kjvbible_x10.txt" \
   "./optimized/target/release/countwords < kjvbible_x10.txt" \
+  "./optimized-hashbrown/target/release/countwords < kjvbible_x10.txt" \
   "./optimized-customhashmap/target/release/countwords < kjvbible_x10.txt" \
   "./optimized-unsafe/target/release/countwords < kjvbible_x10.txt" \
   "./optimized-trie/target/release/countwords < kjvbible_x10.txt" \
