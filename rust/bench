@@ -1,0 +1,20 @@
+#!/bin/bash
+
+input=kjvbible_x10.txt
+if ! [ -f "$input" ]; then
+  for ((i = 0; i < 10; i++)); do
+    cat ../kjvbible.txt
+  done > "$input"
+fi
+for d in */; do
+  (cd "$d" && cargo update && cargo build --release)
+done
+exec hyperfine \
+  "./simple/target/release/countwords < kjvbible_x10.txt" \
+  "./bonus/target/release/countwords < kjvbible_x10.txt" \
+  "./optimized/target/release/countwords < kjvbible_x10.txt" \
+  "./optimized-customhashmap/target/release/countwords < kjvbible_x10.txt" \
+  "./optimized-unsafe/target/release/countwords < kjvbible_x10.txt" \
+  "./optimized-trie/target/release/countwords < kjvbible_x10.txt" \
+  "./kimono-optimized/target/release/countwords < kjvbible_x10.txt" \
+  "./kimono-simple/target/release/countwords < kjvbible_x10.txt"
